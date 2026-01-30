@@ -6,14 +6,19 @@ format:
   html:
     toc: true
     number-sections: true
+    toc-depth: 3
+execute:
+  echo: true
+  warning: false
+  message: false
 ---
 
 ## Conceitos preliminares
 
 ### Amostras dependentes e independentes
 
-- **Amostras dependentes**: mesmas unidades observadas em dois momentos  
-- **Amostras independentes**: grupos distintos
+- **Amostras dependentes**: mesmas unidades observadas em dois momentos.
+- **Amostras independentes**: grupos distintos, sem pareamento.
 
 ---
 
@@ -36,26 +41,114 @@ $$
 ou
 
 $$
+H_0: \mu_A = \mu_B \\
 H_1: \mu_A < \mu_B
 $$
 
 ---
 
-## Nível de significância e tipos de erro
+## Nível de significância e tipos de erros
 
 | Decisão | $H_0$ verdadeira | $H_0$ falsa |
-|------|----------------|------------|
+|--------|-----------------|-------------|
 | Rejeitar $H_0$ | Erro Tipo I ($\alpha$) | Decisão correta |
 | Não rejeitar $H_0$ | Decisão correta | Erro Tipo II ($\beta$) |
 
 ---
 
-## Estudo 1 – Amostras dependentes
-
-Avaliação do impacto do **Programa Academia da Cidade** no conhecimento sobre alimentação saudável.
+## Estudo 1 – Teste t para amostras dependentes
 
 ### Dados
 
 ```{r}
 Pa <- c(14, 15, 15, 11, 11, 10)
 Pd <- c(15, 14, 16, 15, 17, 15)
+```
+
+### Estatística do teste
+
+```{r}
+d <- Pd - Pa
+d
+mean(d)
+var(d)
+```
+
+$$
+\bar d = \frac{1}{n}\sum_{i=1}^{n} d_i
+$$
+
+$$
+t = \frac{\bar d}{\sqrt{s_d^2/n}} \sim t_{n-1}
+$$
+
+```{r}
+t.test(Pd, Pa, paired = TRUE)
+```
+
+---
+
+## Estudo 2 – Amostras independentes com variâncias iguais
+
+### Dados
+
+```{r}
+A <- c(81, 77, 78, 68, 73)
+B <- c(63, 68, 69, 60, 62, 63)
+```
+
+### Teste F para variâncias
+
+$$
+H_0: S_A^2 = S_B^2 \\
+H_1: S_A^2 \neq S_B^2
+$$
+
+```{r}
+var.test(A, B)
+```
+
+### Teste t (variâncias iguais)
+
+$$
+S_p^2 = \frac{(n_A-1)S_A^2 + (n_B-1)S_B^2}{n_A + n_B - 2}
+$$
+
+$$
+t = \frac{\bar X_B - \bar X_A}{\sqrt{\left(\frac{1}{n_A}+\frac{1}{n_B}\right)S_p^2}}
+\sim t_{n_A+n_B-2}
+$$
+
+```{r}
+t.test(A, B, var.equal = TRUE)
+```
+
+---
+
+## Estudo 3 – Amostras independentes com variâncias diferentes (Welch)
+
+### Dados
+
+```{r}
+UPA1 <- c(10, 12, 10, 7, 10)
+UPA2 <- c(5, 5, 2, 20, 12, 23)
+```
+
+### Teste F (opcional)
+
+```{r}
+var.test(UPA1, UPA2)
+```
+
+### Teste t de Welch
+
+$$
+t = \frac{\bar X_B - \bar X_A}{\sqrt{\frac{S_A^2}{n_A} + \frac{S_B^2}{n_B}}}
+\sim t_g
+$$
+
+```{r}
+t.test(UPA1, UPA2, var.equal = FALSE)
+```
+
+---
