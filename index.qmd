@@ -1,0 +1,61 @@
+---
+title: "Testes t – Unidade I"
+subtitle: "SAUD0016 – Bioestatística"
+author: "Prof. Carlos Renato"
+format:
+  html:
+    toc: true
+    number-sections: true
+---
+
+## Conceitos preliminares
+
+### Amostras dependentes e independentes
+
+- **Amostras dependentes**: mesmas unidades observadas em dois momentos  
+- **Amostras independentes**: grupos distintos
+
+---
+
+## Hipóteses estatísticas
+
+### Teste bilateral
+
+$$
+H_0: \mu_A = \mu_B \\
+H_1: \mu_A \neq \mu_B
+$$
+
+### Teste unilateral
+
+$$
+H_0: \mu_A = \mu_B \\
+H_1: \mu_A > \mu_B
+$$
+
+ou
+
+$$
+H_1: \mu_A < \mu_B
+$$
+
+---
+
+## Nível de significância e tipos de erro
+
+| Decisão | $H_0$ verdadeira | $H_0$ falsa |
+|------|----------------|------------|
+| Rejeitar $H_0$ | Erro Tipo I ($\alpha$) | Decisão correta |
+| Não rejeitar $H_0$ | Decisão correta | Erro Tipo II ($\beta$) |
+
+---
+
+## Estudo 1 – Amostras dependentes
+
+Avaliação do impacto do **Programa Academia da Cidade** no conhecimento sobre alimentação saudável.
+
+### Dados
+
+```{r}
+Pa <- c(14, 15, 15, 11, 11, 10)
+Pd <- c(15, 14, 16, 15, 17, 15)
