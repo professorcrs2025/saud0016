@@ -58,6 +58,15 @@ $$
 
 ## Estudo 1 – Teste t para amostras dependentes
 
+::: {.callout-note title="Enunciado"}
+Com a finalidade de avaliar o impacto do **Programa Academia da Cidade** no
+conhecimento sobre alimentação saudável, um questionário é aplicado no primeiro
+dia de ingresso do participante (Pa) e um mês após participar de atividades
+corporais, rodas de diálogos e palestras com os profissionais (Pd).
+
+O questionário tem pontuação de 0 a 20. Para uma amostra de 6 participantes,
+os dados estão resumidos a seguir. O que se pode concluir a respeito?
+:::
 ### Dados
 
 ```{r}
